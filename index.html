@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ActivityPub JSON to Markdown Converter</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>ActivityPub JSON to Markdown Converter</h1>
+    <p>Upload an ActivityPub JSON file and click the "Convert to Markdown" button to generate and download a Markdown file.</p>
+    <p>上传 ActivityPub JSON 文件并点击 "Convert to Markdown "按钮，生成并下载 Markdown 文件。</p>
+    <p>No data will be collected on this site and you can view the source code by clicking on this link：https://github.com/py233/ActivityPub2md</p>
+    <p>本网站不会收集任何数据，您可以点击以下链接查看源代码：https://github.com/py233/ActivityPub2md</p>
+
+    <h2>Please select the file named outbox.json</h2>
+    <h2>请选择名为 outbox.json 的文件</h2>
+    <input type="file" id="jsonFile" accept=".json">
+    <br>
+    <button onclick="convertJsonToMarkdown()">Convert to Markdown</button>
+
+    <script>
+        function convertJsonToMarkdown() {
+            var jsonFileInput = document.getElementById("jsonFile");
+            var file = jsonFileInput.files[0];
+
+            if (!file) {
+                alert("Please select a JSON file.");
+                return;
+            }
+
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                var jsonData = event.target.result;
+
+                try {
+                    var data = JSON.parse(jsonData);
+
+                    // Create Markdown content
+                    var markdownContent = "";
+
+                    for (var i = 0; i < data.orderedItems.length; i++) {
+                        var item = data.orderedItems[i];
+                        markdownContent += "### " + item.published + "\n";
+                        markdownContent += "Original URL: " + item.object.url + "\n";
+                        markdownContent += item.object.content + "\n\n";
+                    }
+
+                    var blob = new Blob([markdownContent], { type: "text/plain" });
+                    var a = document.createElement("a");
+                    a.href = URL.createObjectURL(blob);
+                    a.download = "activitypub_data.md";
+                    a.style.display = "none";
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                } catch (error) {
+                    alert("Invalid JSON data.");
+                }
+            };
+
+            reader.readAsText(file);
+        }
+    </script>
+</body>
+</html>
