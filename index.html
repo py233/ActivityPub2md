@@ -2,7 +2,46 @@
 <html>
 <head>
     <title>ActivityPub JSON to Markdown Converter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        h2 {
+            font-size: 20px;
+        }
+
+        p {
+            font-size: 16px;
+        }
+
+        @media screen and (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            h2 {
+                font-size: 18px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 <body>
     <h1>ActivityPub JSON to Markdown Converter</h1>
@@ -10,7 +49,6 @@
     <p>上传 ActivityPub JSON 文件并点击 "Convert to Markdown "按钮，生成并下载 Markdown 文件。</p>
     <p>No data will be collected on this site and you can view the source code by clicking on   <a href="https://github.com/py233/ActivityPub2md">link</a>.</p>
     <p>本网站不会收集任何数据，您可以点击 <a href="https://github.com/py233/ActivityPub2md">链接</a> 查看源代码。</p>
-    
 
     <h2>Please select the file named outbox.json</h2>
     <h2>请选择名为 outbox.json 的文件</h2>
